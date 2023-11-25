@@ -3,7 +3,7 @@
 ; Task Performance - TP.asm                     ;
 ; 64-bit NASM Assembly Language                 ;
 ;                                               ;
-; - - - - - - - - - - - - - - - - - - - - - - - -
+; - - - - - - - - - - - - - - - - - - - - - - - ;
 
 section .data
     prompt      db      "Enter a single-digit number [0-9]: ",  0
