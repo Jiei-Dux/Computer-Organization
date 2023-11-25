@@ -1,0 +1,16 @@
+I dont really know how to explain the structure of my program, all I know is how it
+works...
+
+My program works by basically showing a prompt telling the user to
+"Enter a single-digit number [0-9]: ", if it isn't obvious yet, the program only
+accepts, single-digit numbers and will jump to error if it exceeds it.
+
+Now, my program will then take the user input and compares it with 5.
+
+If the user input is less than the integer of 5, then it will tell the user just
+that, if the user input is greater than 5, then it will tell the user just that,
+if its equals to 5, it will tell the user that, but if the user input is below 0
+or greater than 9, then the program will jump to error and exits.
+
+That is pretty much all what my program does as thats all what the PDF is asking
+for... so yeah...
