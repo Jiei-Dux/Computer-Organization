@@ -1,0 +1,106 @@
+So basically, the program just asks the user to enter a number, the user can enter any number, but if they want to quit, they can enter '0' instead.
+After the user entered a number, the program then converts the input into binary.
+After the program converts the input into binary, it then displays it in a new line.
+How does the program converts the input to binary you might ask?
+The program just basically reads each character of the user's input and converts them into binary.
+After processing each and every characters inside `convert_loop` and `convert_bit`, it then displays the output.
+
+
+THE CODE:
+
+===== ===== ===== ===== ===== ===== ===== ===== ===== =====
+
+section .data
+    Input db 'Enter a number (or just "0" to quit): ', 0
+    Output db 'You entered: ', 0
+    newLoine db 10, 0
+    quit_key db '0', 0
+
+section .bss
+    input resb 16
+    binary resb 64
+
+section .text
+    global _start
+
+_start:
+    ; Prints out the dialog or sum'n whatever you call it
+    mov eax, 4
+    mov ebx, 1
+    mov ecx, Input
+    mov edx, 38
+    int 0x80
+
+read_userInput:
+    ; This part reads user input
+    mov eax, 3
+    mov ebx, 0
+    mov ecx, input
+    mov edx, 16
+    int 0x80
+
+    ; This one checks if the user wanted to quit
+    cmp byte [input], '0'
+    je quit
+
+    ; This part prints out the output message
+    mov eax, 4
+    mov ebx, 1
+    mov ecx, Output
+    mov edx, 14
+    int 0x80
+
+    ; This part prints out the user input
+    mov eax, 4
+    mov ebx, 1
+    mov ecx, input
+    add edx, 1
+    int 0x80
+
+    ; This part prints out the newLoine
+    mov eax, 4
+    mov ebx, 1
+    mov ecx, newLoine
+    mov edx, 1
+    int 0x80
+
+    ; This part converts the user input to binary
+    mov edi, 0
+    mov esi, 0
+
+convert_loop:
+    mov al, byte [input + esi]
+    mov ecx, 8
+
+convert_bit:
+    shl al, 1
+    adc byte [binary + edi], 0
+    shl byte [binary + edi], 1
+    add byte [binary + edi], '0'
+    inc edi
+    dec ecx
+    jnz convert_bit
+
+    inc esi
+    cmp byte [input + esi], 0
+    jne convert_loop
+
+    ; This prints out the binary form
+    mov eax, 4
+    mov ebx, 1
+    mov ecx, binary
+    sub edx, 1
+    int 0x80
+
+    ; The loop... you know? while loops?
+    ; for loops? stuff like that...
+    jmp _start
+
+quit:
+    ; This one exits the program
+    mov eax, 1
+    xor ebx, ebx
+    int 0x80
+
+===== ===== ===== ===== ===== ===== ===== ===== ===== =====
+
