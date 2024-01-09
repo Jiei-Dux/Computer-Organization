@@ -1,5 +1,5 @@
 section .data
-    hello db 'Hello, Linux TLDR!', 0
+    hello db 'Hello and quack quack mfer!', 0
 
 section .text
     global _start
@@ -13,7 +13,7 @@ _start:
 
     mov eax, 4
     mov ebx, 1
-    mov ecx, newline
+    mov ecx, newLoine
     mov edx, 1
     int 0x80
 
@@ -21,4 +21,4 @@ _start:
     int 0x80
 
 section .data
-    newline db 10
+    newLoine db 10
